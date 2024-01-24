@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdatePortfolioRequest extends FormRequest
 {
@@ -24,7 +25,7 @@ class UpdatePortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'min: 5', 'max: 200'],
+            'title' => ['required', 'min: 5', 'max: 200', Rule::unique('portfolios')->ignore($this->portfolio)],
             'description' => ['nullable', 'max: 500']
         ];
     }
