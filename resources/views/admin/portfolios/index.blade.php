@@ -2,8 +2,13 @@
 
 @section('content')
     <h1 class="text-center mt-5">My portfolios</h1>
-
     
+    @if (session('message'))
+        <div class="alert alert-warning w-50 m-auto my-3">
+            {{ session('message') }}
+        </div>
+    @endif
+
 
     <div class="container mt-3">
 
@@ -38,6 +43,12 @@
                             <a class="btn btn-warning" href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->slug]) }}">
                                 Modifica
                             </a>
+
+                            <form action="{{ route('admin.portfolios.destroy', ['portfolio' => $portfolio->slug]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Elimina</button>
+                            </form>
                         </td>
                 </tr> 
                 @endforeach
