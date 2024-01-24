@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <h2 class="text-center mt-5">Dettagli di:</h2>

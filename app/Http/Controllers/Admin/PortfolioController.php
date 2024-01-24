@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdatePortfolioRequest;
 use App\Models\Portfolio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -41,7 +42,6 @@ class PortfolioController extends Controller
         $form_data = $request->all();
         $portfolio = new Portfolio;
         $portfolio->fill($form_data);
-        $portfolio->slug = Str::slug($portfolio->title, '-');
         $portfolio->save();
 
         return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug]);
@@ -51,7 +51,7 @@ class PortfolioController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Portfolio  $portfolio
      * @return \Illuminate\Http\Response
      */
     public function show(Portfolio $portfolio)
@@ -74,21 +74,15 @@ class PortfolioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  POrtfolio  $portfolio
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $slug)
+    public function update(UpdatePortfolioRequest $request, Portfolio $portfolio)
     {
         $form_data = $request->all();
+        $portfolio->update($form_data);
 
-        $portfolio_to_update = Portfolio::where('slug', $slug)->first();
-        $portfolio_to_update->title = $form_data['title'];
-        $portfolio_to_update->description = $form_data['description'];
-        $portfolio_to_update->slug = Str::slug($portfolio_to_update->title, '-');
-        
-        $portfolio_to_update->save();
-
-        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio_to_update->slug]);
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio->slug]);
     }
 
     /**

@@ -10,11 +10,21 @@
             @method('PUT')
             <div class="mb-3">
                 <label for="title" class="form-label">Titolo</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ $portfolio->title }}">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title' ,$portfolio->title) }}">
+                
+                @error('title')
+                <div class="text-danger">{{ $message }}</div>
+                @enderror
+            
             </div>
-            <div class="mb-3">
-                <label for="description" class="form-label">Descrizione</label>
-                <textarea class="form-control" id="description" rows="3" name="description">{{ $portfolio->description }}</textarea>
+            <div class="mb-3 has-validation">
+                <label for="description" class="form-label @error('description') is-invalid @enderror">Descrizione</label>
+                <textarea class="form-control" id="description" rows="3" name="description">{{ old('description', $portfolio->description) }}</textarea>
+            
+                @error('description')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
+            
             </div>
 
             <button class="btn btn-warning" type="submit">Modifica</button>

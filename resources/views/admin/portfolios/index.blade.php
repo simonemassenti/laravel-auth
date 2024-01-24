@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <h1 class="text-center mt-5">My portfolios</h1>
@@ -12,6 +12,8 @@
                 Crea un nuovo portfolio
             </a>
         </div>
+
+        
 
         <table class="table table-striped">
             <thead>
