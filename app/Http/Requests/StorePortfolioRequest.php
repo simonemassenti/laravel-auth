@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UpdatePortfolioRequest extends FormRequest
+class StorePortfolioRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class UpdatePortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'min: 5', 'max: 200', Rule::unique('portfolios')->ignore($this->portfolio)],
+            'title' => ['required', 'min: 5', 'max: 200', Rule::unique('portfolios')],
             'description' => ['nullable', 'max: 500']
         ];
     }
