@@ -65,9 +65,9 @@ class PortfolioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Portfolio $portfolio)
     {
-        //
+        return view('admin.portfolios.edit', compact('portfolio'));
     }
 
     /**
@@ -77,9 +77,18 @@ class PortfolioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $slug)
     {
-        //
+        $form_data = $request->all();
+
+        $portfolio_to_update = Portfolio::where('slug', $slug)->first();
+        $portfolio_to_update->title = $form_data['title'];
+        $portfolio_to_update->description = $form_data['description'];
+        $portfolio_to_update->slug = Str::slug($portfolio_to_update->title, '-');
+        
+        $portfolio_to_update->save();
+
+        return redirect()->route('admin.portfolios.show', ['portfolio' => $portfolio_to_update->slug]);
     }
 
     /**

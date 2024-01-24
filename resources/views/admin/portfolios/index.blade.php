@@ -32,6 +32,10 @@
                             <a class="btn btn-primary" href="{{ route('admin.portfolios.show', ['portfolio' => $portfolio->slug]) }}">
                                 Dettagli
                             </a>
+
+                            <a class="btn btn-warning" href="{{ route('admin.portfolios.edit', ['portfolio' => $portfolio->slug]) }}">
+                                Modifica
+                            </a>
                         </td>
                 </tr> 
                 @endforeach
