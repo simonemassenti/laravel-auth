@@ -21,7 +21,6 @@ class PortfoliosTableSeeder extends Seeder
             $portfolio = new Portfolio;
             $portfolio->title = $faker->sentence(5);
             $portfolio->description = $faker->text(500);
-            $portfolio->slug = Str::slug($portfolio->title);
             $portfolio->save();
         }
     }
