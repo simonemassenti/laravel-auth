@@ -1,6 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
+
+<div class="mt-5 ms-3">
+<a href="{{ url()->previous() }}"> &leftarrow; Torna indietro</a>
+</div>
+    
 
     <h2 class="text-center mt-5">Modifica il Portfolio</h2>
 
